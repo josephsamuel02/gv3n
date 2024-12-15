@@ -1,0 +1,23 @@
+model Mining_Record {
+  id        Int       @id @default(autoincrement())
+  chatId    String    @unique
+  balance   Int?
+  status    String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  history   history[]
+}
+
+model history {
+  id               Int            @id @default(autoincrement())
+  chatId           String
+  start_time       DateTime?
+  end_time         DateTime?
+  gv3n_mined       Int?
+  mining_Record_id Int?
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  Mining_Record    Mining_Record? @relation(fields: [mining_Record_id], references: [id])
+
+  @@index([mining_Record_id], map: "history_mining_Record_id_fkey")
+}

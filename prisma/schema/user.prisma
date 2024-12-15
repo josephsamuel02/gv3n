@@ -1,0 +1,28 @@
+model User {
+  id            Int            @id @default(autoincrement())
+  chatId        String         @unique
+  username      String?
+  first_name    String?
+  last_name     String?
+  phone_number  String?        @unique
+  profile_image String?
+  UserReferral  UserReferral[]
+  userId        String?        @unique
+  invited_by    String?
+  email         String?        @unique
+  password      String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model UserReferral {
+  id              Int      @id @default(autoincrement())
+  chatId          String   @unique
+  invited_user_id String   @unique
+  username        String?
+  referral_bonus  Int?     @default(0)
+  referral_date   DateTime @default(now())
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  user            User     @relation(fields: [chatId], references: [chatId])
+}

@@ -1,0 +1,9 @@
+model Tasks {
+  id          Int       @id @default(autoincrement())
+  platform    String
+  url         String
+  instruction String?
+  start_date  DateTime?
+  end_date    DateTime?
+  status      String?
+}
